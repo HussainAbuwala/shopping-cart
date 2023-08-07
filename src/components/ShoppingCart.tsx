@@ -3,7 +3,6 @@ import { useShoppingCart } from "../context/ShoppingCartContext"
 import { formatCurrency } from "../utilities/formatCurrency"
 import { CartItem } from "./CartItem"
 import storeItems from "../data/items.json"
-import { useState } from "react"
 
 type ShoppingCartProps = {
     isOpen: boolean
@@ -12,7 +11,6 @@ type ShoppingCartProps = {
 export function ShoppingCart({ isOpen }: ShoppingCartProps) {
     console.log(import.meta.env.VITE_SERVER_URL)
     const { closeCart, cartItems } = useShoppingCart()
-    const [isProduction, setIsProduction] = useState(true)
 
     function handleCheckout() {
         fetch(`${import.meta.env.VITE_SERVER_URL}/create-checkout-session`, {
@@ -29,7 +27,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
         }).then(({ url }) => {
             window.location = url
         }).catch(e => {
-            setIsProduction(true)
+            console.log(e)
         })
     }
 
