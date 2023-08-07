@@ -3,6 +3,7 @@ import { useShoppingCart } from "../context/ShoppingCartContext"
 import { formatCurrency } from "../utilities/formatCurrency"
 import { CartItem } from "./CartItem"
 import storeItems from "../data/items.json"
+import { useState } from "react"
 
 type ShoppingCartProps = {
     isOpen: boolean
@@ -11,8 +12,9 @@ type ShoppingCartProps = {
 export function ShoppingCart({ isOpen }: ShoppingCartProps) {
     console.log(import.meta.env.VITE_SERVER_URL)
     const { closeCart, cartItems } = useShoppingCart()
+    const [isProduction, setIsProduction] = useState(true)
 
-    function handleCheckout(){
+    function handleCheckout() {
         fetch(`${import.meta.env.VITE_SERVER_URL}/create-checkout-session`, {
             method: "POST",
             headers: {
@@ -22,12 +24,12 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
                 items: cartItems
             })
         }).then(res => {
-            if(res.ok) return res.json()
+            if (res.ok) return res.json()
             else return res.json().then(json => Promise.reject(json))
-        }).then(({url}) => {
+        }).then(({ url }) => {
             window.location = url
         }).catch(e => {
-            console.error(e.error)
+            setIsProduction(true)
         })
     }
 
@@ -50,7 +52,10 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
                             }, 0)
                         )}
                     </div>
-                    <button onClick={handleCheckout} type="button" className="btn btn-dark">Checkout</button>
+                    <button disabled={true} onClick={handleCheckout} type="button" className="btn btn-dark">Checkout</button>
+                    <div className="alert alert-danger" role="alert">
+                        As this is a test app, checkout is disabled in production to mitigate misuse!
+                    </div>
                 </Stack>
             </Offcanvas.Body>
         </Offcanvas>
