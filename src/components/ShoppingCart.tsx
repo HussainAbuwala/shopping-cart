@@ -9,7 +9,28 @@ type ShoppingCartProps = {
 }
 
 export function ShoppingCart({ isOpen }: ShoppingCartProps) {
+    console.log(import.meta.env.VITE_SERVER_URL)
     const { closeCart, cartItems } = useShoppingCart()
+
+    function handleCheckout(){
+        fetch(`${import.meta.env.VITE_SERVER_URL}/create-checkout-session`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                items: cartItems
+            })
+        }).then(res => {
+            if(res.ok) return res.json()
+            else return res.json().then(json => Promise.reject(json))
+        }).then(({url}) => {
+            window.location = url
+        }).catch(e => {
+            console.error(e.error)
+        })
+    }
+
     return (
         <Offcanvas show={isOpen} onHide={closeCart} placement="end">
             <Offcanvas.Header closeButton>
@@ -29,6 +50,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
                             }, 0)
                         )}
                     </div>
+                    <button onClick={handleCheckout} type="button" className="btn btn-dark">Checkout</button>
                 </Stack>
             </Offcanvas.Body>
         </Offcanvas>
