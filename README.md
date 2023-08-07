@@ -1,27 +1,32 @@
-# React + TypeScript + Vite
+# E-commerce Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a test web application to mimic an e-commerce store. The application supports a shopping cart and also allows users to checkout and pay for the items through Stripe, which is widely used online payment processing platform that allows businesses and individuals to accept payments over the internet.
 
-Currently, two official plugins are available:
+![Screen Recording 2023-08-07 at 12 48 04 PM](https://github.com/HussainAbuwala/shopping-cart/assets/77569166/e4ba2726-5ee8-4b47-afb3-bfd42322350c)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+There is a live demo available at [Live Demo](https://aquamarine-kelpie-17bf9f.netlify.app). Do note that in the live demo, the checkout functionality will not work to mitigate abuse.
 
-## Expanding the ESLint configuration
+## Installation:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository: `git clone https://github.com/HussainAbuwala/shopping-cart.git`
+2. Navigate to the project directory: `cd shopping-cart`
+3. Install dependencies for client: `npm install`
+4. To run the client: `npm run dev`
+5. Install dependencies for server: `cd server`, `npm install`
+6. To run the server: `npm run devStart`
+7. Configure the environment variables for the server and client URLs according to your port number in both the client and server `.env` files.
+8. Configure the STRIPE API key with your own private key in the server `.env` file.
+9. Remove the `disabled` property in the `checkout` button in the `ShoppingCart.tsx` component.
 
-- Configure the top-level `parserOptions` property like this:
+## Tools & Languages Used
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+1. HTML5
+2. CSS3
+3. Bootstrap
+4. JavaScript
+5. TypeScript
+6. React
+7. Stripe
+10. GitHub
+11. netlify
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
