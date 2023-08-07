@@ -16,6 +16,7 @@ There is a live demo available at [Live Demo](https://aquamarine-kelpie-17bf9f.n
 6. To run the server: `npm run devStart`
 7. Configure the environment variables for the server and client URLs according to your port number in both the client and server `.env` files.
 8. Configure the STRIPE API key with your own private key in the server `.env` file.
+9. Remove the `disabled` property in the `checkout` button in the `ShoppingCart.tsx` component.
 
 ## Tools & Languages Used
 
